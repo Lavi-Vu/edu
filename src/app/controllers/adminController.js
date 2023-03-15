@@ -22,9 +22,6 @@ class adminController {
           })
       })
       .catch(next);
-    
-      
-
   }
   //[GET] admin/account
   showAccount(req, res, next) {
@@ -100,5 +97,4 @@ class adminController {
       .catch(next);
   }
 }
-
 module.exports = new adminController();
