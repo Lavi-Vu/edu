@@ -1168,19 +1168,25 @@ COURSE MODULES
     border-radius: 6px 6px 0 0;
     background-color: #ffffff;
     border: 1px solid #eaeaea;
+    width: 330px;
+    height: 500px;
 }
 
 .course-box img {
     border-radius: 6px 6px 0 0;
-    width: 100%;
+    width: 330px;
+    height: 220px;
 }
 
 .course-details {
+    overflow: hidden;
     padding: 3rem 2rem;
+    width: 330px;
+    height: 200px;
 }
 
 .course-details h4 {
-    font-size: 18px;
+    font-size: 15px;
     padding: 0 0 1.5rem;
     font-weight: 700;
     margin: 0;
@@ -1193,6 +1199,9 @@ COURSE MODULES
 }
 
 .course-details p {
+    overflow: hidden;
+    width: 290px;
+    height: 140px;
     padding-bottom: 0;
     margin-bottom: 0;
 }
@@ -1483,7 +1492,8 @@ BLOG
 }
 
 .image-wrap img {
-    width: 100%;
+    width: 330px;
+    height: 220px;
 }
 
 .image-wrap:after {
@@ -1501,6 +1511,8 @@ BLOG
     background-color: #ffffff;
     border-radius: 6px 6px 0 0;
     border: 1px solid #eaeaea;
+    width: 360px;
+    height: 500px;
 }
 
 .blog-box .magnifier {

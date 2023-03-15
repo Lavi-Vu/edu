@@ -25,17 +25,18 @@
           <th scope="col">Họ</th>
           <th scope="col">Tên</th>
           <th scope="col">Email</th>
-          <th scope="col"></th>
+          <th scope="col">Cac khoa hoc da Join</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        {{#each account}}
+        {{#each data}}
         <tr>
-          <th scope="row">{{sum @index 1}}</th>
+          <th scope="row"></th>
           <td>{{this.firstName}}</td>
           <td>{{this.lastName}}</td>
           <td>{{this.email}}</td>
+          <td>{{this.list_course.name}}</td>
           {{!-- <td>{{this.list_course.course}}</td> --}}
           {{!-- <td><a href="/admin/{{this._id}}/edit">Sửa</a></td>
           <td>
@@ -45,7 +46,7 @@
 
             </form>
           </td> --}}
-          <td><a href="/admin/account/detail/{{this._id}}">Chi tiet</a></td>
+          <td><a href="/admin/account/{{this._id}}">Chi tiet</a></td>
 
 
         </tr>

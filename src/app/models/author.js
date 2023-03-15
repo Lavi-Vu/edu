@@ -5,15 +5,9 @@ const Schema = mongoose.Schema;
 const author = new Schema({
     name: {type: String},
     email: {type: String},
-    // list_course:{
-    //     course: {
-    //         type: Schema.Types.ObjectId,
-    //         ref:'Course',
-    //     }
-    // }
     list_course:[{
         type: Schema.Types.ObjectId,
-        ref:'Course'    
+        ref: 'Course'  
     }]
 },
 {
@@ -21,5 +15,6 @@ const author = new Schema({
 });
 
  // register the schema
-
+author.set('toObject', { getters: true });
+author.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model('author', author)

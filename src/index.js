@@ -36,16 +36,14 @@ app.engine(
   "hbs",
   hbs.engine({
     extname: ".hbs",
-    helpers: {
-      sum(a, b) {
-        return a + b;
-      },
-    },
-  })
+    defaultLayout:'main'
+  }),
+  
 );
 
-app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resources", "views"));
+app.set("view engine", "hbs");
+app.set('view options', { layout: 'other'});
 
 //static
 // Use static folder

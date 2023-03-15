@@ -24,17 +24,21 @@
           <th scope="col">#</th>
           <th scope="col">Tên Khóa Học</th>
           <th scope="col">Trình độ</th>
+          <th scope="col">Tác Giả</th>
           <th scope="col">videoId</th>
+
           <th scope="col"></th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        {{#each course}}
+        {{#each data}}
         <tr>
-          <th scope="row">{{sum @index 1}}</th>
+          <th scope="row">{{this._id}}</th>
           <td>{{this.name}}</td>
           <td>{{this.level}}</td>
+          {{!-- Profile Author --}}
+          <td><a href="admin/author/{{this.author._id}}">{{this.author.name}}</a></td>
           <td>{{this.videoId}}</td>
           <td><a href="/admin/{{this._id}}/edit">Sửa</a></td>
           <td>

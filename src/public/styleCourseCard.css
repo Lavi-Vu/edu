@@ -1,0 +1,68 @@
+.courseCard {
+    position: relative;
+    width: 275px;
+    height: 200px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .courseCard:before {
+    /* empty pseudo */
+    
+    /* start transparent, include a transition bcuz */
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    
+    /* covers the whole div */
+    position: absolute;
+    /* top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; */
+    
+    z-index: 2;
+  }
+  .courseCard:hover:before {
+    opacity: 1;
+    
+  }
+  
+  .courseCard img {
+    border-radius: 25px;
+    position: absolute;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    z-index: 1;
+    
+  }
+  
+  .btnLearnNow {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    position: relative;
+    padding: 0 20px;
+    height: 35px;
+    max-width: 200px;
+    border: 0 solid;
+    border-radius:12px ;
+    /* line-height: 35px; */
+    /* height: 40px;
+    line-height: 40px;
+    max-width: 260px; */
+    cursor: pointer;
+    z-index: 3;
+  }
+  .courseCard:hover .btnLearnNow {
+    opacity: 1;
+    
+  }
+  .courseName{
+    font-size: 1.6rem;
+    line-height: 1.4;
+  }
+  .CourseList{
+    margin-right: 20px;
+  }
+

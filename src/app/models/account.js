@@ -7,17 +7,16 @@ const account = new Schema({
     lastName: {type: String},
     email: {type: String},
     password: {type: String},
-    list_course:{
-        course: {
-            type: String,
-            ref:'Course',
-        }
-    }
+    list_course:[{
+        ref: 'Course',
+        type: String,
+    }]
 },
-{
+{   
+    collection:'accounts',
     timestamps: true,
 });
 
  // register the schema
-
+account.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model('account', account)

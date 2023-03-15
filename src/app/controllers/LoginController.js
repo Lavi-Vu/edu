@@ -15,7 +15,7 @@ class LoginController {
     var password = req.body.password;
     //check admin
     if (email == "admin@admin.com" && password == "admin") {
-      req.session.isLoggedIn = true;
+      // req.session.isLoggedIn = true;
       return res.redirect("/admin");
     }
     // not admin then check normal account

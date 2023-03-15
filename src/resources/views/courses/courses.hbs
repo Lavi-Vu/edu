@@ -19,30 +19,28 @@
             <div class="row blog-grid">
 
                 {{!-- start courses card --}}
-                {{#each courses}}
 
+                {{#each courses}}
                 <div class="col-md-4">
                     <div class="course-box">
                         <div class="image-wrap entry">
                             <img src="{{this.image}}" alt="" class="img-responsive">
-                            <div class="magnifier">
-                                <a href="courses/{{this.tag}}/{{this.slug}}" title=""><i class="">Bắt đầu</i></a>
-                            </div>
+                            
                         </div><!-- end image-wrap -->
                         <div class="course-details">
                             <h4>
-                                <a href="courses/{{this.tag}}/{{this.slug}}" title="">{{this.name}}</a>
+                                <a href="courses/{{this.slug}}" title="">{{this.name}}</a>
                             </h4>
                             <p>{{this.description}}</p>
                         </div><!-- end details -->
                         <div class="course-footer clearfix">
-                            <button type="button" class="btn btn-info">Xem khóa học</button>
+                            <a href="courses/{{this.slug}}"><button type="button" class="btn btn-info">Xem khóa học</button></a>
 
                         </div><!-- end footer -->
                     </div><!-- end box -->
                 </div><!-- end col -->
-
                 {{/each}}
+
 
 
                 <hr class="invis">
