@@ -1,4 +1,4 @@
-const account = require("../models/account");
+const User = require("../models/User")
 const { mutipleMongooseToObject } = require("../../util/mongoose");
 const { mongooseToObject } = require("../../util/mongoose");
 const jwt = require("jsonwebtoken");
@@ -9,37 +9,21 @@ class LoginController {
    
     res.render("login/login", { layout: false });
   }
-  //[POST] //login
-  login(req, res, next) {
-    var email = req.body.email;
-    var password = req.body.password;
-    //check admin
-    if (email == "admin@admin.com" && password == "admin") {
-      // req.session.isLoggedIn = true;
-      return res.redirect("/admin");
+  async login(req,res){
+    try{
+      const { email, password } = req.body
+      if (email == "admin@admin.com" && password == "admin"){
+        return res.redirect("/admin")
+      }
+      const user = await User.findByCredentials(email, password)
+      if (!user) {
+        return res.status(401).send({error: 'Login failed! Check authentication credentials'})
+      }
+      const token = await user.generateAuthToken()
+      res.send({ user, token })
     }
-    // not admin then check normal account
-    else {
-      account
-        .findOne({
-          email: email,
-          password: password,
-        })
-        .then((data) => {
-          if (data) {
-            var token = jwt.sign(
-              {
-                _id: data._id,
-              },
-              "mk"
-            );
-            res.cookie("authToken", token, { httpOnly: true, maxAge: 300000 }); // expires after 5 minutes
-            res.send("Login successful !! Welcome to Dashboard");
-          } else {
-            res.json("LOGIN FAIL !!!");
-          }
-        })
-        .catch(next);
+    catch (error){
+      res.status(400).send(error)
     }
   }
 }

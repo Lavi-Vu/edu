@@ -1,15 +1,14 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
+const app = express();
+const auth = require("../../middleware/auth")
+
 
 const CourseController = require("../../app/controllers/CoursesController");
 
-// router.get("/python/:slug", CourseController.show);
-// router.get('/c/:slug', CourseController.cplus)
-// router.get('/js/:slug', CourseController.js)
-// router.get('/js', CourseController.js)
-// router.get('/c', CourseController.cplus)
-// router.get("/python", CourseController.python);
-router.get('/:slug',CourseController.show)
+router.post('/save',CourseController.saveCourse)
+router.get('/learn/:slug',CourseController.courseLearn);
+router.get('/detail/:slug',CourseController.courseDetail);
 router.get("/", CourseController.allCourses);
 
 module.exports = router;

@@ -10,9 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parse": "^0.1.0",
     "bootstrap": "^5.3.0-alpha1",
+    "child_process": "^1.0.2",
     "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-handlebars": "^6.0.7",
     "express-session": "^1.17.3",
@@ -24,7 +27,15 @@
     "mongoose-delete": "^0.5.4",
     "mongoose-sequence": "^5.3.1",
     "mongoose-slug-generator": "^1.0.4",
-    "node-sass": "^8.0.0"
+    "morgan": "^1.10.0",
+    "node-sass": "^8.0.0",
+    "passport": "^0.6.0",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth20": "^2.0.0",
+    "python-shell": "^5.0.0",
+    "socket.io": "^4.6.1",
+    "validator": "^13.9.0",
+    "vm2": "^3.9.14"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

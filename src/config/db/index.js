@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const server = "127.0.0.1:27017"; // REPLACE WITH YOUR DB SERVER
 const database = "Edulogy"; // REPLACE WITH YOUR DB NAME
-
+// mongoose.set('strictQuery', true);
 class Database {
   constructor() {
     this._connect();

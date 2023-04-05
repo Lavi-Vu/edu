@@ -1,13 +1,20 @@
 const Course = require("../models/Course");
-const account = require("../models/account");
+const account = require("../models/lecture");
 const author = require("../models/author")
 const { mutipleMongooseToObject } = require("../../util/mongoose");
 const { mongooseToObject } = require("../../util/mongoose");
 const mongoose = require('mongoose');
 
 class adminController {
+  
   //[GET] /admin
-  show(req, res, next) {
+  dashboard(req,res,next){
+    res.render('admin/dashboard',{
+      layout:'admin',
+    })
+  }
+
+  listCourses(req, res, next) {
     Course.find({})
       .populate({
         path: 'author',
@@ -18,7 +25,7 @@ class adminController {
       .then((data) => {
         res.render('admin/coursesManage',{
             data: mutipleMongooseToObject(data),
-            layout: false,
+            layout: 'admin',
           })
       })
       .catch(next);
@@ -62,17 +69,30 @@ class adminController {
   }
   //[GET] /admin/add
   addCourse(req, res, next) {
-    res.render("admin/addCourse", { layout: false });
+    res.render("admin/addCourse", { layout:false });
   }
   //[POST] /admin/add
-  addSaveCourse(req, res, next) {
-    req.body.image = `https://img.youtube.com/vi/${req.body.videoId}/mqdefault.jpg`;
-        const course = new Course(req.body);
-        course
-            .save()
-            .then(() => res.redirect('/admin'))
-            .catch((error) => {});
-  }
+  // addSaveCourse(req, res, next) {
+  //   req.body.image = `https://img.youtube.com/vi/${req.body.videoId}/mqdefault.jpg`;
+  //       const course = new Course(req.body);
+  //       course
+  //           // .save()
+  //           // .then(() => res.redirect('/admin'))
+  //           // .catch((error) => {});
+  //       console.log(course);
+  // }
+    async addSaveCourse(req,res,next){
+      const course = new Course(req.body);
+      try{
+        await course.save();
+        res.redirect("/admin/list-courses")
+      }
+      catch (error){
+        console.log(error)
+      }
+      };
+      
+    
   // [GET] /admin/:id/edit
   editCourse(req, res, next) {
     Course.findById(req.params.id)
@@ -87,13 +107,13 @@ class adminController {
   // [PUT] /admin/:id/edit
   updateCourse(req, res, next) {
     Course.updateOne({ _id: req.params.id }, req.body)
-      .then(() => res.redirect("/admin"))
+      .then(() => res.redirect("/admin/list-courses"))
       .catch(next);
   }
   //[DELETE] /admin/:id/delete
   destroy(req, res, next) {
     Course.deleteOne({ _id: req.params.id })
-      .then(() => res.redirect("/admin"))
+      .then(() => res.redirect("/admin/list-courses"))
       .catch(next);
   }
 }

@@ -1,78 +1,80 @@
 const Course = require("../models/Course")
 const author = require("../models/author");
-const account = require("../models/account")
+const lecture = require("../models/lecture")
 const { mutipleMongooseToObject } = require("../../util/mongoose");
 const { mongooseToObject } = require("../../util/mongoose");
-
+const User = require("../models/User")
+const mongoose = require('mongoose')
+const { NodeVM } = require('vm2');
 class testController {
-    show(req,res,next){
-      account.findById({
-        _id: req.params.id
-      })
-      .populate({
-        path:'list_course',
-        select: 'name '
-      })
-      .then((data) => {
-        console.log(data.list_course)
-      })
-    }
-  // show(req, res, next) {
-    
-    //   .find({name : 'Nguyên Vũ'})
-    //   .populate('list_course')
-    //   .then((data) => {
-        
-    //     res.json(data)
-    //   })
-    //   .catch(next)
+    // async addCourse(req,res,next){
+    //     const course = new Course(req.body);
+    //     try{
+            
+    //      await res.json(course)
+    //     }
+    //     catch (error){
+    //       console.log(error)
+    //     }
+    //     };
+    // async addLecture(req,res,next){
+    //    var lecture = {
+    //     "lectureName": "11111introduction",
+    //     "topic": [
+    //       {
+    //         "topicName": "test Topic Name",
+    //         "videoID": "sheV2IBlQkU"
+    //       },
+    //       {
+    //         "topicName": "test Topic Name2",
+    //         "videoID": "sheV2IBlQkU"
+    //       }
+    //     ]
     // }
-        
-    //       })    //     // res.render("test", {
-    //     //     userData,
-    //     //     layout: false,
-    //     //   });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // author.find({}).populate('list_course').exec(function (err, author) {
-    //   if (err) return handleError(err);
-    //   console.log('The user with courses is:', author);
-    // });
-    // show(req, res, next) {
-    //   Course.find({})
-    //   .populate({
-    //     path: 'author',
-    //     select: 'name _id',
+    // lecture.save()
+    // async addLecture(req,res,next){
+    //     const Lecture = new lecture({
+    //             "lectureName": "22222introduction",
+    //             "topic": [
+    //               {
+    //                 "topicName": "test Topic Name",
+    //                 "videoID": "sheV2IBlQkU"
+    //               },
+    //               {
+    //                 "topicName": "test Topic Name2",
+    //                 "videoID": "sheV2IBlQkU"
+    //               }
+    //             ]
+    //         });
+    //     try{
+    //       await Lecture.save();
+    //     }
+    //     catch (error){
+    //       console.log(error)
+    //     }
+    //     };
 
-    //   })
-    //   // .select('name')
-    //   .then((data) => {
-    //     console.log(data)
-    //     res.render('admin/coursesManage',{
-    //         data: mutipleMongooseToObject(data),
-    //         layout: false,
-    //       })
-        
-        // data = data.forEach(data => {
-        //   var userData = data.toObject()
-        //   console.log(userData.author.name)
-          // res.json(mutipleMongooseToObject(userData))
-          // res.render('admin/coursesManage',{
-          //   data: mutipleMongooseToObject(data),
-          //   layout: false,
-          // })
-          // console.log(userData.name,userData.email);
-          // userData.list_course.forEach(course => {
-          //     console.log(course)
-          // })
-          // console.log(userData)
-      // })
-
-      // })
-      // .catch(next);
-               
-// }
+    // getCourse(req,res,next){
+    //     Course.findOne({ name :"test COURSE ADD WITH NEW SCHEMA"})
+    //     .populate({
+    //         path:'lecture',
+    //     })
+    //     .then((data) => {
+    //         // const dataObj = data.map(data => data.toObject())
+    //         res.json(data.lecture[0].lectureName)
+    //     }) 
+    //     .catch(next)
+    // }
+    // getCourse(req,res,next){
+    //     res.render('test',{layout : false})
+    // }
+    // test(req,res){
+    //     res.send('hmm')
+    // }
+    // test(req,res){
+    //     const user = new User(req.body)
+    //     const token = user.generateAuthToken()
+    //     console.log(user)
+    // }
 }
 module.exports = new testController();

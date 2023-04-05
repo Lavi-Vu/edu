@@ -1,8 +1,8 @@
-const account = require("../models/account");
+const account = require("../models/lecture");
 const { mutipleMongooseToObject } = require("../../util/mongoose");
 const { mongooseToObject } = require("../../util/mongoose");
 const jwt = require("jsonwebtoken");
-
+const User = require("../models/User")
 class RegisterController {
   //[GET]
   getRegisterSite(req, res) {
@@ -16,13 +16,17 @@ class RegisterController {
   // }
 
   /// Register OK
-  register(req, res) {
-    const accounts = new account(req.body);
-    accounts
-      .save()
-      .then(() => res.send("SAVED!!!!"))
-      .catch((error) => {});
+  async register(req,res){
+    try {
+      const user = new User(req.body)
+      await user.save()
+      const token = await user.generateAuthToken()
+      res.redirect('home')
+  } catch (error) {
+      res.status(400).send(error)
+  }
   }
 }
 
 module.exports = new RegisterController();
+  

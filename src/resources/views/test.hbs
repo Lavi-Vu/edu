@@ -1,79 +1,222 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+  <head>
+    <title>Create Course</title>
+    <style>
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      input[type="submit"] {
+        margin-top: 20px;
+      }
+      .lecture {
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+      .lecture label {
+        font-weight: bold;
+      }
+      .lecture .topic {
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+      .lecture .topic label {
+        font-weight: normal;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Create Course</h1>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <label for="description">Description:</label>
+      <textarea id="description" name="description"></textarea>
 
-  <title>ADMIN</title>
-</head>
+      <label for="image">Image:</label>
+      <input type="text" id="image" name="image">
 
-<body>
-  <div class="container mt-4">
-    <div>
-      <h3>Tác Giả Khóa Học</h3>
+      <label for="videoId">Video ID:</label>
+      <input type="text" id="videoId" name="videoId">
 
-    </div>
+      <label for="level">Level:</label>
+      <select id="level" name="level">
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+      </select>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Tên Tác Giả</th>
-          <th scope="col">Email</th>
-          <th scope="col">Các khóa học đã upload</th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          {{#each userData}}
-          <td>{{this.name}}</td>
-          <td>{{this.email}}</td>
-          <td>{{this.list_course}}</td>
-          {{/each}}
-          
-        </tr>
-         
-      </tbody>
-    </table>
+      <div class="lecture">
+        <label for="lectureName">Lecture Name:</label>
+        <input type="text" id="lectureName" name="lectureName" required>
 
+        <div class="topic">
+          <label for="topicName">Topic Name:</label>
+          <input type="text" id="topicName" name="topicName" required>
+
+          <label for="topicVideoId">Topic Video ID:</label>
+          <input type="text" id="topicVideoId" name="topicVideoId" required>
+        </div>
+
+        <button id="addTopic" type="button">Add Topic</button>
+      </div>
+
+      <button id="addLecture" type="button">Add Lecture</button>
+
+      <input type="submit" value="Create Course">
+    </form>
+
+    <script>
+      const form = document.querySelector('form');
+      const addLectureButton = document.querySelector('#addLecture');
+      const addTopicButton = document.querySelector('#addTopic');
+      let lectureCount = 1;
+      let topicCount = 1;
+
+      addLectureButton.addEventListener('click', () => {
+        const lectureDiv = document.createElement('div');
+        lectureDiv.classList.add('lecture');
+
+        const lectureNameLabel = document.createElement('label');
+        lectureNameLabel.setAttribute('for', `lecture${lectureCount}-name`);
+        lectureNameLabel.textContent = `Lecture ${lectureCount} Name:`;
+
+        const lectureNameInput = document.createElement('input');
+        lectureNameInput.setAttribute('type', 'text');
+        lectureNameInput.setAttribute('id', `lecture${lectureCount}-name`);
+        lectureNameInput.setAttribute('name', `lecture${lectureCount}-name`);
+        lectureNameInput.required = true;
+
+        const topicDiv = document.createElement('div');
+        topicDiv.classList.add('topic');
+
+        const topicNameLabel = document.createElement('label');
     
+    topicNameLabel.setAttribute('for', `lecture${lectureCount}-topic${topicCount}-name`);
+    topicNameLabel.textContent = `Topic ${topicCount} Name:`;
 
-  </div>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-</body>
+    const topicNameInput = document.createElement('input');
+    topicNameInput.setAttribute('type', 'text');
+    topicNameInput.setAttribute('id', `lecture${lectureCount}-topic${topicCount}-name`);
+    topicNameInput.setAttribute('name', `lecture${lectureCount}-topic${topicCount}-name`);
+    topicNameInput.required = true;
 
+    const topicVideoIdLabel = document.createElement('label');
+    topicVideoIdLabel.setAttribute('for', `lecture${lectureCount}-topic${topicCount}-videoId`);
+    topicVideoIdLabel.textContent = `Topic ${topicCount} Video ID:`;
+
+    const topicVideoIdInput = document.createElement('input');
+    topicVideoIdInput.setAttribute('type', 'text');
+    topicVideoIdInput.setAttribute('id', `lecture${lectureCount}-topic${topicCount}-videoId`);
+    topicVideoIdInput.setAttribute('name', `lecture${lectureCount}-topic${topicCount}-videoId`);
+    topicVideoIdInput.required = true;
+
+    topicDiv.appendChild(topicNameLabel);
+    topicDiv.appendChild(topicNameInput);
+    topicDiv.appendChild(topicVideoIdLabel);
+    topicDiv.appendChild(topicVideoIdInput);
+
+    const lectureTopicsInput = document.createElement('input');
+    lectureTopicsInput.setAttribute('type', 'hidden');
+    lectureTopicsInput.setAttribute('id', `lecture${lectureCount}-topics`);
+    lectureTopicsInput.setAttribute('name', `lecture${lectureCount}-topics`);
+
+    lectureDiv.appendChild(lectureNameLabel);
+    lectureDiv.appendChild(lectureNameInput);
+    lectureDiv.appendChild(topicDiv);
+    lectureDiv.appendChild(lectureTopicsInput);
+
+    form.insertBefore(lectureDiv, addLectureButton);
+
+    lectureCount++;
+    topicCount = 1;
+  });
+
+  addTopicButton.addEventListener('click', (e) => {
+    const lectureDiv = e.target.parentNode;
+    const topicDiv = lectureDiv.querySelector('.topic');
+
+    const topicNameLabel = document.createElement('label');
+    topicNameLabel.setAttribute('for', `lecture${lectureCount}-topic${topicCount}-name`);
+    topicNameLabel.textContent = `Topic ${topicCount} Name:`;
+
+    const topicNameInput = document.createElement('input');
+    topicNameInput.setAttribute('type', 'text');
+    topicNameInput.setAttribute('id', `lecture${lectureCount}-topic${topicCount}-name`);
+    topicNameInput.setAttribute('name', `lecture${lectureCount}-topic${topicCount}-name`);
+    topicNameInput.required = true;
+
+    const topicVideoIdLabel = document.createElement('label');
+    topicVideoIdLabel.setAttribute('for', `lecture${lectureCount}-topic${topicCount}-videoId`);
+    topicVideoIdLabel.textContent = `Topic ${topicCount} Video ID:`;
+
+    const topicVideoIdInput = document.createElement('input');
+    topicVideoIdInput.setAttribute('type', 'text');
+    topicVideoIdInput.setAttribute('id', `lecture${lectureCount}-topic${topicCount}-videoId`);
+    topicVideoIdInput.setAttribute('name', `lecture${lectureCount}-topic${topicCount}-videoId`);
+    topicVideoIdInput.required = true;
+
+    topicDiv.appendChild(topicNameLabel);
+    topicDiv.appendChild(topicNameInput);
+    topicDiv.appendChild(topicVideoIdLabel);
+    topicDiv.appendChild(topicVideoIdInput);
+
+    const lectureTopicsInput = lectureDiv.querySelector(`#lecture${lectureCount}-topics`);
+    const topics = JSON.parse(lectureTopicsInput.value || '[]');
+    topics.push({
+      topicName: topicNameInput.value,
+      videoID: topicVideoIdInput.value
+    });
+    lectureTopicsInput.value =
+      JSON.stringify(topics);
+
+    topicCount++;
+  });
+
+  submitButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    const name = document.querySelector('#name').value;
+    const description = document.querySelector('#description').value;
+    const image = document.querySelector('#image').value;
+    const videoId = document.querySelector('#videoId').value;
+    const level = document.querySelector('#level').value;
+    const price = document.querySelector('#price').value;
+    const tag = document.querySelector('#tag').value;
+    const lectures = [];
+
+    const lectureDivs = document.querySelectorAll('.lecture');
+    for (const lectureDiv of lectureDivs) {
+      const lectureName = lectureDiv.querySelector(`input[type="text"]`).value;
+      const topics = JSON.parse(lectureDiv.querySelector(`input[type="hidden"]`).value || '[]');
+
+      const lecture = {
+        lectureName,
+        topic: topics.map(topic => ({
+          topicName: topic.topicName,
+          videoID: topic.videoID
+        }))
+      };
+      lectures.push(lecture);
+    }
+
+    const data = {
+      name,
+      description,
+      image,
+      videoId,
+      level,
+      lecture: lectures,
+      price,
+      tag
+    };
+
+    console.log(data);
+    // Send data to server to save
+  });
+</script>
+ </body>
 </html>
-{{!-- {{#each data}}
-{{#each list_course}}
-          <td>{{course.name}}</td>
-          {{/each}}
-        <tr>
-          <th scope="row">{{sum @index 1}}</th>
-          <td>{{this.name}}</td>
-          <td>{{this.email}}</td>
-          
- 
-
-        </tr>
-{{/each}} --}}
-  {{!-- <p>course name : {{data1.course.name}}</p>
-{{#each data}}
-  <h1>{{name}}</h1>
-  <p>{{email}}</p>
-{{/each}} --}}
-
-

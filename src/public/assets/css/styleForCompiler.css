@@ -1,0 +1,25 @@
+label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  textarea {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 10px;
+  }
+
+  select {
+    margin-bottom: 10px;
+  }
+
+  #output {
+    white-space: pre-wrap;
+  }
+.compiler{
+    background-color: black;
+    color: white;
+}
+/* .compiler textarea{
+    
+} */

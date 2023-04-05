@@ -1,117 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Mirrored from eduport.webestica.com/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Mar 2023 12:31:43 GMT -->
 <head>
+	<title>Eduport - LMS, Education and Course Theme</title>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<!-- Meta Tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="Webestica.com">
+	<meta name="description" content="Eduport- LMS, Education and Course Theme">
 
-    <title>SB Admin 2 - Login</title>
+	<!-- Dark mode -->
+	<script>
+		const storedTheme = localStorage.getItem('theme')
+ 
+		const getPreferredTheme = () => {
+			if (storedTheme) {
+				return storedTheme
+			}
+			return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+		}
 
-    <!-- Custom fonts for this template-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link href="/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+		const setTheme = function (theme) {
+			if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-bs-theme', 'dark')
+			} else {
+				document.documentElement.setAttribute('data-bs-theme', theme)
+			}
+		}
 
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+		setTheme(getPreferredTheme())
+
+		window.addEventListener('DOMContentLoaded', () => {
+		    var el = document.querySelector('.theme-icon-active');
+			if(el != 'undefined' && el != null) {
+				const showActiveTheme = theme => {
+				const activeThemeIcon = document.querySelector('.theme-icon-active use')
+				const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+				const svgOfActiveBtn = btnToActive.querySelector('.mode-switch use').getAttribute('href')
+
+				document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+					element.classList.remove('active')
+				})
+
+				btnToActive.classList.add('active')
+				activeThemeIcon.setAttribute('href', svgOfActiveBtn)
+			}
+
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+				if (storedTheme !== 'light' || storedTheme !== 'dark') {
+					setTheme(getPreferredTheme())
+				}
+			})
+
+			showActiveTheme(getPreferredTheme())
+
+			document.querySelectorAll('[data-bs-theme-value]')
+				.forEach(toggle => {
+					toggle.addEventListener('click', () => {
+						const theme = toggle.getAttribute('data-bs-theme-value')
+						localStorage.setItem('theme', theme)
+						setTheme(theme)
+						showActiveTheme(theme)
+					})
+				})
+
+			}
+		})
+		
+	</script>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com/">
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&amp;family=Roboto:wght@400;500;700&amp;display=swap">
+
+	<!-- Plugins CSS -->
+	<link rel="stylesheet" type="text/css" href="/assets/vendor/font-awesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap-icons/bootstrap-icons.css">
+
+	<!-- Theme CSS -->
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 
 </head>
 
-<body class="bg-gradient-primary">
+<body>
 
-    <div class="container">
+<!-- **************** MAIN CONTENT START **************** -->
+<main>
+	<section class="p-0 d-flex align-items-center position-relative overflow-hidden">
+	
+		<div class="container-fluid">
+			<div class="row">
+				<!-- left -->
+				<div class="col-12 col-lg-6 d-md-flex align-items-center justify-content-center bg-primary bg-opacity-10 vh-lg-100">
+					<div class="p-3 p-lg-5">
+						<!-- Title -->
+						<div class="text-center">
+							<h2 class="fw-bold">Welcome to our largest community</h2>
+							<p class="mb-0 h6 fw-light">Let's learn something new today!</p>
+						</div>
+						<!-- SVG Image -->
+						<img src="/assets/images/element/02.svg" class="mt-5" alt="">
+						<!-- Info -->
+						<div class="d-sm-flex mt-5 align-items-center justify-content-center">
+							<!-- Avatar group -->
+							<ul class="avatar-group mb-2 mb-sm-0">
+								<li class="avatar avatar-sm">
+									<img class="avatar-img rounded-circle" src="/assets/images/avatar/01.jpg" alt="avatar">
+								</li>
+								<li class="avatar avatar-sm">
+									<img class="avatar-img rounded-circle" src="/assets/images/avatar/02.jpg" alt="avatar">
+								</li>
+								<li class="avatar avatar-sm">
+									<img class="avatar-img rounded-circle" src="/assets/images/avatar/03.jpg" alt="avatar">
+								</li>
+								<li class="avatar avatar-sm">
+									<img class="avatar-img rounded-circle" src="/assets/images/avatar/04.jpg" alt="avatar">
+								</li>
+							</ul>
+							<!-- Content -->
+							<p class="mb-0 h6 fw-light ms-0 ms-sm-3">4k+ Students joined us, now it's your turn.</p>
+						</div>
+					</div>
+				</div>
 
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
+				<!-- Right -->
+				<div class="col-12 col-lg-6 m-auto">
+					<div class="row my-5">
+						<div class="col-sm-10 col-xl-8 m-auto">
+							<!-- Title -->
+							<span class="mb-0 fs-1">👋</span>
+							<h1 class="fs-2">Login into Eduport!</h1>
+							<p class="lead mb-4">Nice to see you! Please log in with your account.</p>
 
-            <div class="col-xl-10 col-lg-12 col-md-9">
+							<!-- Form START -->
+							<form method="POST">
+								<!-- Email -->
+								<div class="mb-4">
+									<label for="exampleInputEmail1" class="form-label">Email address *</label>
+									<div class="input-group input-group-lg">
+										<span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="bi bi-envelope-fill"></i></span>
+										<input type="email" class="form-control border-0 bg-light rounded-end ps-1" placeholder="E-mail" id="email" name="email">
+									</div>
+								</div>
+								<!-- Password -->
+								<div class="mb-4">
+									<label for="inputPassword5" class="form-label">Password *</label>
+									<div class="input-group input-group-lg">
+										<span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="fas fa-lock"></i></span>
+										<input type="password" class="form-control border-0 bg-light rounded-end ps-1" placeholder="Password" id="password" name="password">
+									</div>
+									<div id="passwordHelpBlock" class="form-text">
+										Your password must be 8 characters at least 
+									</div>
+								</div>
+								<!-- Check box -->
+								<div class="mb-4 d-flex justify-content-between mb-4">
+									<div class="form-check">
+										<input type="checkbox" class="form-check-input" id="exampleCheck1">
+										<label class="form-check-label" for="exampleCheck1">Remember me</label>
+									</div>
+									<div class="text-primary-hover">
+										<a href="forgot-password.html" class="text-secondary">
+											<u>Forgot password?</u>
+										</a>
+									</div>
+								</div>
+								<!-- Button -->
+								<div class="align-items-center mt-0">
+									<div class="d-grid">
+										<button class="btn btn-primary mb-0" type="submit" >Login</button>
+									</div>
+								</div>
+							</form>
+							<!-- Form END -->
 
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                                    </div>
-                                    <form class="user" method="POST" action="/login">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address..." name="email">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password" name="password">
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div>
-                                        <button class="btn btn-primary btn-user btn-block" type="submit">Đăng
-                                            Nhập</button>
-                                        <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z" />
-                                            </svg> Tiếp tục với Google
-                                        </a>
-                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
-                                            </svg> Tiếp tục với Facebook
-                                        </a>
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Quên Mật Khẩu?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="/register">Đăng Kí !</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+							<!-- Social buttons and divider -->
+							<div class="row">
+								<!-- Divider with text -->
+								<div class="position-relative my-4">
+									<hr>
+									<p class="small position-absolute top-50 start-50 translate-middle bg-body px-5">Or</p>
+								</div>
 
-            </div>
+								<!-- Social btn -->
+								<div class="col-xxl-6 d-grid">
+									<a href="#" class="btn bg-google mb-2 mb-xxl-0"><i class="fab fa-fw fa-google text-white me-2"></i>Login with Google</a>
+								</div>
+								<!-- Social btn -->
+								<div class="col-xxl-6 d-grid">
+									<a href="#" class="btn bg-facebook mb-0"><i class="fab fa-fw fa-facebook-f me-2"></i>Login with Facebook</a>
+								</div>
+							</div>
 
-        </div>
+							<!-- Sign up link -->
+							<div class="mt-4 text-center">
+								<span>Don't have an account? <a href="/register">Signup here</a></span>
+							</div>
+						</div>
+					</div> <!-- Row END -->
+				</div>
+			</div> <!-- Row END -->
+		</div>
+	</section>
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
 
-    </div>
+<!-- Back to top -->
+<div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i></div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/js/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
-    <script src="/js/bootstrap.bundle.js"></script>
+<!-- Bootstrap JS -->
+<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/js/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
+<!-- Template Functions -->
+<script src="/assets/js/functions.js"></script>
 
 </body>
 
+<!-- Mirrored from eduport.webestica.com/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Mar 2023 12:31:44 GMT -->
 </html>
