@@ -85,11 +85,11 @@ router.post('/', (req, res) => {
 //   `);
 // });  
 
-router.get('/', (req,res) => {
-    res.render('test2',{
-        layout:false
-    })
-})
+// router.get('/', (req,res) => {
+//     res.render('test2',{
+//         layout:false
+//     })
+// })
 // router.get('/',(req,res) =>{
 //   const vm  = require('vm')
 
@@ -124,9 +124,9 @@ router.get('/', (req,res) => {
 //         res.status(400).send(error)
 //     }
 // })
-router.get('/me', auth ,async(req,res) => {
-    res.send(req.user)
-})
+// router.get('/me', auth ,async(req,res) => {
+//     res.send(req.user)
+// })
 // router.post('/me/logout', auth, async (req, res) => {
 //     // Log user out of the application
 //     try {

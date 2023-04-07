@@ -81,6 +81,7 @@ class adminController {
   //           // .catch((error) => {});
   //       console.log(course);
   // }
+  //[POST] /admin/add
     async addSaveCourse(req,res,next){
       const course = new Course(req.body);
       try{

@@ -266,7 +266,10 @@
 							aria-expanded="false">Contact</a>
 					</li>
 
-
+						<li class="nav-item">
+						<a class="nav-link" href="/courses" id="demoMenu" 
+							aria-haspopup="true" aria-expanded="false">All Course</a>
+					</li>
 
 					<!-- Nav item 4 Megamenu-->
 					<li class="nav-item dropdown dropdown-fullwidth">
@@ -423,7 +426,8 @@
 			<!-- Main navbar END -->
 
 			<!-- Profile START -->
-			{{!-- <div class="dropdown ms-1 ms-lg-0">
+			{{#if user}}
+			<div class="dropdown ms-1 ms-lg-0">
 				<a class="avatar avatar-sm p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside"
 					data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
 					<img class="avatar-img rounded-circle" src="/assets/images/avatar/01.jpg" alt="avatar">
@@ -439,8 +443,7 @@
 									alt="avatar">
 							</div>
 							<div>
-								<a class="h6" href="#">Lori Ferguson</a>
-								<p class="small m-0">example@gmail.com</p>
+								<a class="h6" href="#">{{user.name}}</a>
 							</div>
 						</div>
 					</li>
@@ -448,7 +451,7 @@
 						<hr class="dropdown-divider">
 					</li>
 					<!-- Links -->
-					<li><a class="dropdown-item" href="#"><i class="bi bi-person fa-fw me-2"></i>Edit Profile</a></li>
+					<li><a class="dropdown-item" href="/profile"><i class="bi bi-person fa-fw me-2"></i>Edit Profile</a></li>
 					<li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Account Settings</a></li>
 					<li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Help</a></li>
 					<li><a class="dropdown-item bg-danger-soft-hover" href="#"><i
@@ -489,11 +492,13 @@
 					</li>
 					<!-- Dark mode options END-->
 				</ul>
-			</div> --}}
+			</div>
 			<!-- Profile START -->
+			{{else}}
 			<div class="navbar-nav ms-2">
 				<a href="/login"><button class="btn btn-sm btn-dark mb-0"><i class="bi bi-power me-2"></i>Sign In</button></a>
 			</div>
+			{{/if}}
 		</div>
 	</nav>
 	<!-- Nav END -->

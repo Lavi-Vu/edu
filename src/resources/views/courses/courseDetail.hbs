@@ -32,7 +32,7 @@ Page intro START -->
 			<div class="col-lg-3">
 				
 				<!-- Button -->
-				<a class="btn btn-warning mb-3 w-100" id="enrollCourse">Enroll Course</a>
+				<a class="btn btn-warning mb-3 w-100" id="enrollCourse" href="/courses/learn/{{course.slug}}">Enroll Course</a>
 
 				
 			
@@ -81,7 +81,7 @@ Page content START -->
 											</button>
 										</h6>
 										
-										<div id="collapse-{{@index}}" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#accordionExample2">
+										<div id="collapse-{{@index}}" class="accordion-collapse collapse" aria-labelledby="heading-1" data-bs-parent="#accordionExample2">
 											<div class="accordion-body mt-3">
 												<!-- Course lecture -->
 												{{#each this.topic}}
@@ -175,23 +175,3 @@ Page content END -->
 
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
-<script>
-	const saveDataButton = document.getElementById('enrollCourse');
-  	saveDataButton.addEventListener('click', (event) => {
-    event.preventDefault(); // prevent the default link behavior
-
-    const data = course._id 
-
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/courses/save');
-    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    xhr.send(JSON.stringify(data));
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        console.log('Data saved successfully');
-      } else {
-        console.error('Error saving data:', xhr.status);
-      }
-    };
-  });
-</script>

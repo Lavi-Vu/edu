@@ -4,8 +4,11 @@ const { mongooseToObject } = require("../../util/mongoose");
 
 
 class CourseController {
-
-
+  ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    res.redirect('/login')
+  }
+  
   saveCourse(req,res,next){
     const data = req.body
     console.log(data)
@@ -15,8 +18,7 @@ class CourseController {
     Course.find({})
     .then((courses) => {
       res.render("courses/courses", {
-        title: "layout2 page",
-        layout: "other-layout",
+        user:req.user,
         courses: mutipleMongooseToObject(courses),
       });
     })
@@ -30,7 +32,7 @@ class CourseController {
           })
     .then((course) =>{
       res.render("courses/courseLearn",{
-        layout:'other-layout',
+        user:req.user,
         course : mongooseToObject(course),
         
       })
@@ -47,7 +49,7 @@ class CourseController {
           })
     .then((course) =>{
       res.render("courses/courseDetail",{
-        layout:'other-layout',
+        user:req.user,
         course : mongooseToObject(course),
         
       })

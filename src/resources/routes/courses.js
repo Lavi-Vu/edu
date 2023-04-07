@@ -7,7 +7,7 @@ const auth = require("../../middleware/auth")
 const CourseController = require("../../app/controllers/CoursesController");
 
 router.post('/save',CourseController.saveCourse)
-router.get('/learn/:slug',CourseController.courseLearn);
+router.get('/learn/:slug',CourseController.ensureAuthenticated,CourseController.courseLearn);
 router.get('/detail/:slug',CourseController.courseDetail);
 router.get("/", CourseController.allCourses);
 

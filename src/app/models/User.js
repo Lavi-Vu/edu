@@ -35,7 +35,11 @@ const userSchema = mongoose.Schema({
             type: String,
             required: true
         }
-    }]
+    }],
+    facebookId:{
+        type:String
+    },
+    photoUrl:{type:String}
 })
 
 userSchema.pre('save', async function (next) {
