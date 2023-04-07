@@ -11,6 +11,11 @@ git remote add origin https://github.com/Lavi-Vu/edu.git
 git branch -M main
 git push -u origin main
 
+
+Cách chạy
+
+npm install 
+
 //populate 
     //   account.findOne({
     //     firstName: 'Nguyen'
