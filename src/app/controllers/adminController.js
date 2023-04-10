@@ -1,5 +1,5 @@
 const Course = require("../models/Course");
-const account = require("../models/lecture");
+const User = require('../models/User')
 const author = require("../models/author")
 const { mutipleMongooseToObject } = require("../../util/mongoose");
 const { mongooseToObject } = require("../../util/mongoose");
@@ -13,7 +13,7 @@ class adminController {
       layout:'admin',
     })
   }
-
+  //[GET] /list-courses
   listCourses(req, res, next) {
     Course.find({})
       .populate({
@@ -30,44 +30,45 @@ class adminController {
       })
       .catch(next);
   }
-  //[GET] admin/account
-  showAccount(req, res, next) {
-    account.find({})
-    .populate({
-      path:'list_course',
-      select: 'name '
-    })
+  //[GET] admin/user
+  showUser(req, res, next) {
+    User.find({})
+    // .populate({
+    //   path:'list_course',
+    //   select: 'name '
+    // })
     .then((data) => {
         res.render("admin/accountManage", {
           data: mutipleMongooseToObject(data),
-          layout: false,
+          layout: 'admin',
         });
       })
       .catch(next);
   }
-   //[GET] /admin/account/:id
-  showAccountDetail(req,res,next){
-    account.findById({
-      _id: req.params.id
-    })
+   //[GET] /admin/user/detail/id
+  showUserDetail(req,res,next){
+    User.findById({_id :req.params.id})
     .populate({
-      path:'list_course',
-    //   populate: {
-    //     path:'author',
-    //     select: 'name '
-    // },
-      select: 'name '
-    })
-    .then((data) => {
-      // var dataListCourse = data.list_course.toObject()
-      var dataListCourse = Object.assign({},data.list_course)
-      res.json(dataListCourse)
+        path: 'list_course',
+        
 
       })
-      
-    
-  }
-  //[GET] /admin/add
+    .then((data)=>{
+        res.render('profile/indexProfile',{
+            data:mongooseToObject(data)
+        })
+    })
+    .catch(next)
+    }
+
+
+//[DELETE]/user/:id/delete
+destroyUser(req, res, next) {
+  User.deleteOne({ _id: req.params.id })
+    .then(() => res.redirect("/admin/user"))
+    .catch(next);
+}
+  //[GET] /admin/list-courses/add
   addCourse(req, res, next) {
     res.render("admin/addCourse", { layout:false });
   }
@@ -81,20 +82,42 @@ class adminController {
   //           // .catch((error) => {});
   //       console.log(course);
   // }
-  //[POST] /admin/add
-    async addSaveCourse(req,res,next){
-      const course = new Course(req.body);
-      try{
-        await course.save();
-        res.redirect("/admin/list-courses")
+  //[POST] /admin/list-courses/add
+    // async addSaveCourse(req,res,next){
+    //   const course = new Course(req.body);
+    //   try{
+    //     console.log(course)
+    //     // await course.save();
+    //     // res.redirect("/admin/list-courses")
+    //   }
+    //   catch (error){
+    //     console.log(error)
+    //   }
+    //   };
+      addSaveCourse(req,res,next){
+        var course = req.body;
+        delete course.search_terms;
+        author.findOne({name : course.author})
+        .then((data)=>{
+          if(data){
+            course.author = data._id
+            course = new Course(course)
+            course.save()
+            .then(()=>{
+              res.redirect("/admin/list-courses")
+            })
+            .catch()
+          }
+          else{
+            res.send("ERROR!!!")
+          }
+        })
+        .catch(next)
+        
       }
-      catch (error){
-        console.log(error)
-      }
-      };
       
     
-  // [GET] /admin/:id/edit
+  // [GET] /admin/list-courses/:id/edit
   editCourse(req, res, next) {
     Course.findById(req.params.id)
       .then((course) =>
@@ -111,7 +134,7 @@ class adminController {
       .then(() => res.redirect("/admin/list-courses"))
       .catch(next);
   }
-  //[DELETE] /admin/:id/delete
+  //[DELETE] /admin/list-courses/:id/delete
   destroy(req, res, next) {
     Course.deleteOne({ _id: req.params.id })
       .then(() => res.redirect("/admin/list-courses"))

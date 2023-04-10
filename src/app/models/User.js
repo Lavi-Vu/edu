@@ -28,7 +28,7 @@ const userSchema = mongoose.Schema({
     },
     list_course:[{
         ref: 'Course',
-       type: Schema.Types.ObjectId
+       type: Schema.Types.Mixed
     }],
     tokens: [{
         token: {

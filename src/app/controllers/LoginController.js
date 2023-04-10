@@ -12,6 +12,7 @@ class LoginController {
    
     res.render("login/login", { layout: false });
   }
+  //[POST] /login
   async login(req,res){
     try{
       const { email, password } = req.body

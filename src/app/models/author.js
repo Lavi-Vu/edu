@@ -5,10 +5,6 @@ const Schema = mongoose.Schema;
 const author = new Schema({
     name: {type: String},
     email: {type: String},
-    list_course:[{
-        type: Schema.Types.ObjectId,
-        ref: 'Course'  
-    }]
 },
 {
     collection:'author'

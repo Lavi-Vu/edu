@@ -16,6 +16,7 @@ const Course = new Schema(
       {
         ref: "lecture",
         type: Schema.Types.ObjectId,
+        required:false
       },
     ],
     author: {

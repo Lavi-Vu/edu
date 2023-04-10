@@ -567,22 +567,44 @@ Page content START -->
 										<div class="accordion-body mt-3">
 											<div class="vstack gap-3">
 
-											
-											
-
 												<!-- Course topic -->
 												{{#each this.topic}}
 												<div class="d-flex justify-content-between align-items-center">
-													<div class="position-relative d-flex align-items-center">
+													<div class="d-flex align-items-center">
+														<!-- Video button -->
+														<a data-glightbox href="https://www.youtube.com/embed/{{this.videoID}}" class="icon-md position-relative">
+															<img src="assets/images/courses/4by3/01.jpg" class="rounded-1"  alt="">
+															<small class="text-white position-absolute top-50 start-50 translate-middle"><i class="fas fa-play me-0 "></i></small>
+														</a>
+
+														<!-- Content -->
+														
+														<div class="ms-3">
+															<a href="#" class="d-inline-block text-truncate mb-0 h6 fw-normal w-100px w-sm-200px w-md-400px"> {{this.topicName}}</a>
+															
+														</div>
+													</div>
+
+													<!-- Actions Mark button -->
+													
+														
+													</a>
+												</div>
+												{{!-- <div class="d-flex justify-content-between align-items-center">
+													<div class=" d-flex align-items-center">
 														<a href="https://www.youtube.com/embed/{{this.videoID}}" width="1280" height="720" class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static">
 															<i class="fas fa-play me-0"></i>
+														</a>
+														<a data-glightbox data-gallery="office-tour" href="https://www.youtube.com/embed/tXHviS-4ygo" class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static">
+															
+															<i class="fas fa-play me-0 "></i>
 														</a>
 														
 														
 														<span class="d-inline-block text-truncate ms-2 mb-0 h6 fw-light w-200px">{{this.topicName}}</span>
 													</div>
 													
-												</div>
+												</div> --}}
 												{{/each}}
 											{{!-- Use btn-success to play --}}
 											{{!-- Use btn-success to play --}}

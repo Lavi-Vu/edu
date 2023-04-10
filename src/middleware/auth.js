@@ -26,9 +26,11 @@
 // module.exports = auth
 
 const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('../app/models/User');
 const config = require('../config/config')
+const bcrypt = require('bcrypt');
 
 passport.use(new FacebookStrategy({
     clientID: config.facebook_key,
@@ -60,6 +62,34 @@ async(accessToken, refreshToken, profile, done) =>{
     }
     }
 ))
+//Test passport local
+passport.use(new LocalStrategy({
+    // Thiết lập các trường đăng nhập (VD: tên trường username, password)
+    usernameField: 'email', // Tên trường email trong form đăng nhập
+    passwordField: 'password', // Tên trường password trong form đăng nhập
+  }, async (email, password, done) => {
+    try {
+      // Thực hiện logic xác thực đăng nhập
+      // Ví dụ: tìm kiếm user trong MongoDB dựa trên email
+      const user = await User.findOne({ email });
+  
+      // Kiểm tra xem user có tồn tại hay không
+      if (!user) {
+        return done(null, false, { message: 'Email không tồn tại' });
+      }
+  
+      // Kiểm tra xem password có đúng hay không sử dụng bcrypt
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return done(null, false, { message: 'Mật khẩu không chính xác' });
+      }
+  
+      // Nếu xác thực thành công, trả về user
+      return done(null, user);
+    } catch (error) {
+      return done(error);
+    }
+  }));
 passport.serializeUser((user, done) => {
     done(null, user._id);
 });
@@ -72,8 +102,12 @@ passport.deserializeUser((_id, done) => {
 module.exports = {
     facebookAuth: passport.authenticate('facebook', { scope: ['email'] }),
 
-    facebookAuthCallback: passport.authenticate('facebook', {  successRedirect : '/',failureRedirect: '/login' }),
-
+    facebookAuthCallback: passport.authenticate('facebook', {  successRedirect : 'back',failureRedirect: '/login' }),
+    localAuth : passport.authenticate('local', {
+        successRedirect: '/', // Đường dẫn khi đăng nhập thành công
+        failureRedirect: '/login', // Đường dẫn khi đăng nhập thất bại
+        
+      })
     // redirectToProfile: (req, res) => {
     //     // Successful authentication, redirect to profile page or perform other actions
     //     res.redirect('/profile');

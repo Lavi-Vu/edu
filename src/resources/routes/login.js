@@ -12,7 +12,9 @@ router.get('/auth/facebook/callback',
 	    res.redirect('/');
 	  });
 router.get('/auth/facebook', authController.facebookAuth);
-router.post("/", LoginController.login);
+router.post('/',authController.localAuth)
 router.get("/", LoginController.loginSite);
-
+router.get("*", function (req, res) {
+    res.status(404).render("404");
+  });
 module.exports = router;

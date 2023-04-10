@@ -1,21 +1,13 @@
-const account = require("../models/lecture");
 const { mutipleMongooseToObject } = require("../../util/mongoose");
 const { mongooseToObject } = require("../../util/mongoose");
-const jwt = require("jsonwebtoken");
 const User = require("../models/User")
 class RegisterController {
-  //[GET]
+  //[GET] /register
   getRegisterSite(req, res) {
     res.render("login/register", { layout: false });
   }
-  //[POST]
-
-  //test
-  // register(req, res){
-  //     console.log(req.body)
-  // }
-
-  /// Register OK
+ 
+  ///[POST] Register
   async register(req,res){
     try {
       const user = new User(req.body)

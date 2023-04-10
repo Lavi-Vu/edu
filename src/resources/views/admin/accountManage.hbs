@@ -1,69 +1,183 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-  <title>ADMIN</title>
-</head>
-
-<body>
-  <div class="container mt-4">
-    
-
-    
-
-    <h2>Quản lý Account</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Họ</th>
-          <th scope="col">Tên</th>
-          <th scope="col">Email</th>
-          <th scope="col">Cac khoa hoc da Join</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each data}}
-        <tr>
-          <th scope="row"></th>
-          <td>{{this.firstName}}</td>
-          <td>{{this.lastName}}</td>
-          <td>{{this.email}}</td>
-          <td>{{this.list_course.name}}</td>
-          {{!-- <td>{{this.list_course.course}}</td> --}}
-          {{!-- <td><a href="/admin/{{this._id}}/edit">Sửa</a></td>
-          <td>
-            <form action="admin/{{this._id}}/delete?_method=DELETE" method="POST">
-
-              <a href="#" onclick="this.parentNode.submit()">Xóa</a>
-
-            </form>
-          </td> --}}
-          <td><a href="/admin/account/{{this._id}}">Chi tiet</a></td>
 
 
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
+	<!-- Page main content START -->
+	<div class="page-content-wrapper border">
 
-  </div>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-</body>
+		<!-- Title -->
+		<div class="row mb-3">
+			<div class="col-12 d-sm-flex justify-content-between align-items-center">
+				<h1 class="h3 mb-2 mb-sm-0">All User <span class="badge bg-orange bg-opacity-10 text-orange"></span></h1>
+				
+			</div>
+		</div>
 
-</html>
+		<!-- Card START -->
+		<div class="card bg-transparent border">
+
+			<!-- Card header START -->
+			<div class="card-header bg-light border-bottom">
+				<!-- Search and select START -->
+				<div class="row g-3 align-items-center justify-content-between">
+
+					<!-- Search bar -->
+					<div class="col-md-8">
+						<form class="rounded position-relative">
+							<input class="form-control bg-body" type="search" placeholder="Search" aria-label="Search">
+							<button class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset" type="submit">
+								<i class="fas fa-search fs-6 "></i>
+							</button>
+						</form>
+					</div>
+
+					<!-- Select option -->
+					<div class="col-md-3">
+						<!-- Short by filter -->
+						<form>
+							<select class="form-select js-choice border-0 z-index-9" aria-label=".form-select-sm">
+								<option value="">Sort by</option>
+								<option>Newest</option>
+								<option>Oldest</option>
+								<option>Accepted</option>
+								<option>Rejected</option>
+							</select>
+						</form>
+					</div>
+				</div>
+				<!-- Search and select END -->
+			</div>
+			<!-- Card header END -->
+
+			<!-- Card body START -->
+			<div class="card-body">
+				<!-- Course table START -->
+				<div class="table-responsive border-0 rounded-3">
+					<!-- Table START -->
+					<table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+						<!-- Table head -->
+						<thead>
+							<tr>
+								<th scope="col" class="border-0 rounded-start">Name</th>
+								<th scope="col" class="border-0">Email</th>
+								<th scope="col" class="border-0 rounded-end">Action</th>
+							</tr>
+						</thead>
+
+						<!-- Table body START -->
+						<tbody>
+							{{#each data}}
+							<!-- Table row -->
+							<tr>
+								<!-- Table data -->
+								<td>
+									<div class="d-flex align-items-center position-relative">
+										<!-- Image -->
+										{{!-- <div class="w-60px">
+											<img src="{{this.image}}" class="rounded" alt="">
+										</div> --}}
+										<!-- Title -->
+										<h6 class="table-responsive-title mb-0 ms-2">	
+											<a href="/admin/user/detail/{{this._id}}" class="stretched-link">{{this.name}}</a>
+										</h6>
+									</div>
+								</td>
+
+								<!-- Table data -->
+								<td>
+									<div class="d-flex align-items-center">
+										<!-- Avatar -->
+										<div class="avatar avatar-xs flex-shrink-0">
+                      {{#if this.photoUrl}}
+                      <img class="avatar-img rounded-circle" src="{{this.photoUrl}}" alt="avatar">
+                      {{else}}
+											<img class="avatar-img rounded-circle" src="/assets/images/avatar/10.jpg" alt="avatar">
+                      {{/if}}
+										</div>
+										<!-- Info -->
+										<div class="ms-2">
+											<h6 class="mb-0 fw-light">{{this.email}}</h6>
+										</div>
+									</div>
+								</td>
+
+								<!-- Table data -->
+								{{!-- <td>
+									<ul class="list-inline mb-0">
+										<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+										<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+										<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+										<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+										<li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i></li>
+									</ul>
+								</td> --}}
+
+								<!-- Table data -->
+								{{!-- <td> 15,567</td> --}}
+
+								<!-- Table data -->
+								<td>
+                  <form action="/admin/user/{{this._id}}/delete?_method=DELETE" method="POST">
+									{{!-- <a href="/admin/list-courses/{{this._id}}/edit" class="btn btn-sm btn-success me-1 mb-1 mb-md-0">Edit</a> --}}
+									{{!-- <button class="btn btn-sm btn-danger mb-0" onclick="deleteFunction({{this._id}})" type="submit">Delete</button> --}}
+                  
+
+                  <a href="#" onclick="this.parentNode.submit()" class="btn btn-sm btn-danger mt-1">Xóa</a>
+
+                  </form>
+                  
+								</td>
+                <td>{{!-- <form action="/admin/{{this._id}}/delete?_method=DELETE" method="POST">
+
+                  <a href="#" onclick="this.parentNode.submit()" class="btn btn-sm btn-danger mb-0">Xóa</a>
+
+                  </form> --}}</td>
+                  
+							</tr>
+              {{/each}}
+							
+
+						</tbody>
+						<!-- Table body END -->
+					</table>
+					<!-- Table END -->
+				</div>
+				<!-- Course table END -->
+			</div>
+			<!-- Card body END -->
+
+			<!-- Card footer START -->
+			<div class="card-footer bg-transparent pt-0">
+				<!-- Pagination START -->
+				{{!-- <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+					<!-- Content -->
+					<p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
+					<!-- Pagination -->
+					<nav class="d-flex justify-content-center mb-0" aria-label="navigation">
+						<ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+							<li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-left"></i></a></li>
+							<li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
+							<li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
+							<li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
+							<li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>
+						</ul>
+					</nav>
+				</div> --}}
+				<!-- Pagination END -->
+			</div>
+			<!-- Card footer END -->
+		</div>
+		<!-- Card END -->
+	</div>
+	<!-- Page main content END -->
+</div>
+<!-- Page content END -->
+<script>
+  function deleteFunction(id) {
+  fetch('/admin/user/${id}/delete?_method=DELETE', {
+    method: 'POST'
+  })
+  
+  .then{
+    console.log('delete ok')
+  }
+  }
+</script>

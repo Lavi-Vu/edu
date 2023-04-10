@@ -1,19 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <title>Online Python Compiler</title>
 </head>
 <body>
-    {{#each course.lecture}}
-    <p>{{this.lectureName}}</p>
-    {{#each this.topic}}
-    <p class="{{@index}}">test</p>
-    <p>{{this.topicName}}</p>
-    {{/each}}
-    {{/each}}
-    {{!-- <p>{{course.lecture}}</p> --}}
+  <h1>Online Python Compiler</h1>
+  <form id="compilerForm" action="/test" method="POST">
+    <textarea id="codeInput" rows="10" cols="30"></textarea><br>
+    <button type="submit">Run</button>
+  </form>
+  <div id="outputContainer">
+    <pre id="output"></pre>
+  </div>
+  <script >
+    $(document).ready(() => {
+  // Handle form submission
+  $('#compilerForm').on('submit', async (event) => {
+    event.preventDefault();
+
+    // Get the input code from the form
+    const code = $('#codeInput').val();
+
+    // Send a POST request to the backend API for code execution
+    const response = await $.ajax({
+      url: '/compile',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({ code }),
+    });
+
+    // Display the output or error message
+    if (response.output) {
+      $('#output').text(response.output);
+    } else if (response.error) {
+      $('#output').text(`Error: ${response.error}`);
+    }
+
+    // Show the output container
+    $('#outputContainer').show();
+  });
+});
+
+  </script>
 </body>
 </html>

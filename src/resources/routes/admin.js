@@ -12,9 +12,12 @@ router.get("/list-courses/:id/edit", adminController.editCourse);
 router.post("/list-courses/add", adminController.addSaveCourse);
 router.get("/list-courses/add", adminController.addCourse);
 router.get("/list-courses",adminController.listCourses)
-// router.get("/account",adminController.showAccount)
-// router.get("/account/:id",adminController.showAccountDetail)
+router.get("/user",adminController.showUser)
+router.delete("/user/:id/delete", adminController.destroyUser);
+router.get("/user/detail/:id",adminController.showUserDetail)
 router.get("/", adminController.dashboard);
 
-
+router.get("*", function (req, res) {
+    res.status(404).render("404");
+  });
 module.exports = router;
